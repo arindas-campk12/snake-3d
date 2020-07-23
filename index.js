@@ -7,6 +7,8 @@ var score = 0;
 var R_DTHETA = -10;
 var L_DTHETA = +10; 
 
+var GAME_OVER = false;
+
 function getPosition(position) {
     return {'x': position.x, 'y': position.y, 'z': position.z};
 }
@@ -50,6 +52,8 @@ function consumeFood() {
 }
 
 function updateSnakePosition() {
+    if(GAME_OVER) { return; }
+    
     var prevPosition = getPosition(SnakeHead.getPosition());
     var prevRotation = SnakeHead.getRotationY();
 
@@ -166,6 +170,7 @@ function initGame() {
 }
 
 function gameOver() {
+    GAME_OVER = true;
     Game_over.stopSound();
     Game_over.playSound();
     haltSnake();
